@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impostor Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Jogo do Impostor</h1>
+      <p>Crie uma sala, entre com amigos e descubra quem está fingindo.</p>
+    </header>
+
+    <section id="menu" class="card">
+      <div class="tabs">
+        <button id="tabCreate" class="active" onclick="switchTab('create')">Criar Sala</button>
+        <button id="tabJoin" onclick="switchTab('join')">Entrar</button>
+      </div>
+      <input id="nome" placeholder="Seu nome" maxlength="20">
+
+      <div id="createPanel" class="tab-panel">
+        <h2>Criar sala</h2>
+        <label for="tema">Tema</label>
+        <select id="tema">
+          <option value="animais">Animais</option>
+          <option value="comida">Comida</option>
+          <option value="profissao">Profissão</option>
+          <option value="lugares">Lugares</option>
+        </select>
+        <button onclick="criarSala()">Criar Sala</button>
+      </div>
+
+      <div id="joinPanel" class="tab-panel" style="display:none">
+        <h2>Entrar na sala</h2>
+        <input id="codigo" placeholder="Código da sala" maxlength="6">
+        <button onclick="entrarSala()">Entrar</button>
+      </div>
+
+      <p class="hint">A sala precisa de pelo menos 3 jogadores para começar.</p>
+    </section>
+
+    <section id="game" class="card" style="display:none">
+      <div id="statusText" class="status-card">Aguardando atualização do jogo...</div>
+      <div class="room-header">
+        <div class="room-info">
+          <h2 id="codigoSala"></h2>
+          <p id="temaSala"></p>
+          <p id="rodada"></p>
+          <p id="fase"></p>
+          <p id="turno"></p>
+        </div>
+        <div class="host-panel">
+          <div id="themeChange"></div>
+          <div id="hostActions"></div>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <div class="box">
+          <h3>Seu papel</h3>
+          <p id="palavra" class="role-text"></p>
+        </div>
+        <div class="box">
+          <h3>Jogadores</h3>
+          <ul id="listaJogadores"></ul>
+        </div>
+        <div class="box">
+          <h3>Placar</h3>
+          <ul id="placar"></ul>
+        </div>
+      </div>
+
+      <div id="chatArea" class="box chat-box">
+        <h3>Chat da sala</h3>
+        <div id="chat"></div>
+        <div class="chat-input">
+          <input id="msg" placeholder="Digite sua mensagem" maxlength="120">
+          <button id="btnEnviar" onclick="enviar()">Enviar</button>
+        </div>
+      </div>
+
+      <div id="votacao" class="box"></div>
+      <div id="resultado" class="box"></div>
+    </section>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
